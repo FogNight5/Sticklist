@@ -1,0 +1,5 @@
+Sticklist persists its data in the local storage of the user's device.
+
+No synchronization or online features are needed.
+
+As a progressive web app, Sticklist works offline on the user's device.

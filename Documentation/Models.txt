@@ -1,0 +1,12 @@
+topic {
+string name,
+int id,
+string color, 
+bool deleted,
+string description,
+list<entry> entrties }
+
+entry {
+datetime timestamp,
+bool deleted,
+string comment }
