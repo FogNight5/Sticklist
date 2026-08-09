@@ -1,7 +1,50 @@
-﻿@page "/"
+@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Sticklist</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="home">
+    <h1>Sticklist</h1>
 
-Welcome to your new app.
+    <div class="topic">
+        <p class="topic-name">@topic.Name</p>
+        <p class="last-entry">@LastEntryText()</p>
+    </div>
+
+    <button class="add-button" @onclick="AddEntry" aria-label="Add entry">+</button>
+
+    <p class="entry-count">@EntriesTodayCount() @(EntriesTodayCount() == 1 ? "entry" : "entries") today</p>
+</div>
+
+@code {
+    private readonly Topic topic = new() { Id = 1, Name = "Daily task" };
+
+    private void AddEntry()
+    {
+        topic.Entries.Add(new Entry { Timestamp = DateTime.Now });
+    }
+
+    private Entry? LastEntry => topic.Entries.Count > 0 ? topic.Entries[^1] : null;
+
+    private string LastEntryText()
+    {
+        if (LastEntry is null)
+        {
+            return "No entries yet";
+        }
+
+        return $"Last: {LastEntry.Timestamp:MMM d, yyyy, HH:mm}";
+    }
+
+    private int EntriesTodayCount()
+    {
+        var count = 0;
+        foreach (var entry in topic.Entries)
+        {
+            if (entry.Timestamp.Date == DateTime.Today)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+}

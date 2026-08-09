@@ -1,3 +1,25 @@
+:root {
+    --color-bg: #faf9f6;
+    --color-text: #23261f;
+    --color-text-muted: #6e7268;
+    --color-mint-bg: #e1f3e8;
+    --color-mint-border: #8fcfae;
+    --color-mint-text: #1c6b44;
+}
+
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* FocusOnNavigate (App.razor) moves focus to h1 on navigation for screen readers.
+   That focus is script-driven, not keyboard-driven, so the visible ring only adds noise. */
+h1:focus {
+    outline: none;
+}
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
