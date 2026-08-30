@@ -1,4 +1,5 @@
 :root {
+    color-scheme: light dark;
     --color-bg: #faf9f6;
     --color-text: #23261f;
     --color-text-muted: #6e7268;
@@ -7,8 +8,29 @@
     --color-mint-text: #1c6b44;
 }
 
-body {
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #14160f;
+        --color-text: #edefea;
+        --color-text-muted: #9ba096;
+        --color-mint-bg: #1e3a2c;
+        --color-mint-border: #3e7a5a;
+        --color-mint-text: #7fdba8;
+    }
+}
+
+html, body {
+    height: 100%;
     margin: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    position: fixed;
+    width: 100%;
     background: var(--color-bg);
     color: var(--color-text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
