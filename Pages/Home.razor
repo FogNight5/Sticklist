@@ -1,4 +1,5 @@
 @page "/"
+@inject EntryStorageService EntryStorageService
 
 <PageTitle>Sticklist</PageTitle>
 
@@ -18,9 +19,15 @@
 @code {
     private readonly Topic topic = new() { Id = 1, Name = "Daily task" };
 
-    private void AddEntry()
+    protected override async Task OnInitializedAsync()
+    {
+        topic.Entries = await EntryStorageService.LoadEntriesAsync();
+    }
+
+    private async Task AddEntry()
     {
         topic.Entries.Add(new Entry { Timestamp = DateTime.Now });
+        await EntryStorageService.SaveEntriesAsync(topic.Entries);
     }
 
     private Entry? LastEntry => topic.Entries.Count > 0 ? topic.Entries[^1] : null;
