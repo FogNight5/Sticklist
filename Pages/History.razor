@@ -1,0 +1,34 @@
+@page "/history"
+@inject EntryStorageService EntryStorageService
+
+<PageTitle>History</PageTitle>
+
+<div class="history">
+    <h1>History</h1>
+
+    @if (entries.Count == 0)
+    {
+        <p class="empty">No entries yet</p>
+    }
+    else
+    {
+        <ul class="entry-list">
+            @foreach (var entry in entries)
+            {
+                <li>@entry.Timestamp.ToString("MMM d, yyyy, HH:mm")</li>
+            }
+        </ul>
+    }
+
+    <a class="back-link" href="/">Back</a>
+</div>
+
+@code {
+    private List<Entry> entries = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        entries = await EntryStorageService.LoadEntriesAsync();
+        entries.Reverse();
+    }
+}

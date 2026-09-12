@@ -14,6 +14,8 @@
     <button class="add-button" @onclick="AddEntry" aria-label="Add entry">+</button>
 
     <p class="entry-count">@EntriesTodayCount() @(EntriesTodayCount() == 1 ? "entry" : "entries") today</p>
+
+    <a class="history-link" href="/history">History</a>
 </div>
 
 @code {

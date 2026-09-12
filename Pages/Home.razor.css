@@ -53,3 +53,9 @@
     color: var(--color-text-muted);
     margin: 0;
 }
+
+.history-link {
+    font-size: 0.9rem;
+    color: var(--color-mint-text);
+    text-decoration: none;
+}
