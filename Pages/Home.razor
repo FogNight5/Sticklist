@@ -11,15 +11,25 @@
         <p class="last-entry">@LastEntryText()</p>
     </div>
 
-    <button class="add-button" @onclick="AddEntry" aria-label="Add entry">+</button>
+    @if (LimitReachedToday)
+    {
+        <p class="limit-reached">Already logged today</p>
+    }
+    else
+    {
+        <button class="add-button" @onclick="AddEntry" aria-label="Add entry">+</button>
+    }
 
-    <p class="entry-count">@EntriesTodayCount() @(EntriesTodayCount() == 1 ? "entry" : "entries") today</p>
+    @if (!topic.LimitToOncePerDay)
+    {
+        <p class="entry-count">@EntriesTodayCount() @(EntriesTodayCount() == 1 ? "entry" : "entries") today</p>
+    }
 
     <a class="history-link" href="history">History</a>
 </div>
 
 @code {
-    private readonly Topic topic = new() { Id = 1, Name = "Daily task" };
+    private readonly Topic topic = new() { Id = 1, Name = "Daily task", LimitToOncePerDay = true };
 
     protected override async Task OnInitializedAsync()
     {
@@ -30,6 +40,8 @@
     {
         await EntryStorageService.AddEntryAsync(new Entry { Timestamp = DateTime.Now });
     }
+
+    private bool LimitReachedToday => topic.LimitToOncePerDay && EntriesTodayCount() > 0;
 
     private Entry? LastEntry => topic.Entries.Count > 0 ? topic.Entries[^1] : null;
 

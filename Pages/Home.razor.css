@@ -2,42 +2,42 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     height: 100vh;
     height: 100dvh;
-    gap: 1.75rem;
-    padding: 2rem 1.25rem;
-    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    padding: 3rem 1.75rem;
+    padding-top: max(3rem, env(safe-area-inset-top));
+    padding-bottom: max(3rem, env(safe-area-inset-bottom));
     box-sizing: border-box;
     text-align: center;
 }
 
 .home h1 {
-    font-size: 1.4rem;
+    font-size: 2rem;
     font-weight: 600;
     margin: 0;
 }
 
 .topic-name {
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     font-weight: 600;
-    margin: 0 0 0.35rem;
+    margin: 0 0 0.5rem;
 }
 
 .last-entry {
-    font-size: 0.85rem;
+    font-size: 1.05rem;
     color: var(--color-text-muted);
     margin: 0;
 }
 
 .add-button {
-    width: 150px;
-    height: 150px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
     background: var(--color-mint-bg);
     border: 2px solid var(--color-mint-border);
     color: var(--color-mint-text);
-    font-size: 3rem;
+    font-size: 4rem;
     line-height: 1;
     cursor: pointer;
     display: flex;
@@ -50,18 +50,34 @@
     transform: scale(0.96);
 }
 
+.limit-reached {
+    width: 220px;
+    height: 220px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-surface-border);
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+    margin: 0;
+}
+
 .entry-count {
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     color: var(--color-text-muted);
     margin: 0;
 }
 
 .history-link {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+    padding: 1rem 2rem;
+    border-radius: 10px;
     border: 1px solid var(--color-surface-border);
-    font-size: 1rem;
+    font-size: 1.15rem;
     color: var(--color-violet-text);
     text-decoration: none;
 }

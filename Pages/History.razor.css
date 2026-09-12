@@ -1,24 +1,30 @@
 .history {
     display: flex;
     flex-direction: column;
+    align-items: center;
     height: 100vh;
     height: 100dvh;
     box-sizing: border-box;
-    padding: 2rem 1.25rem;
-    padding-bottom: max(2rem, env(safe-area-inset-bottom));
-    gap: 1rem;
+    padding: 3rem 1.75rem;
+    padding-top: max(3rem, env(safe-area-inset-top));
+    padding-bottom: max(3rem, env(safe-area-inset-bottom));
+    gap: 1.5rem;
     text-align: center;
 }
 
 .history h1 {
-    font-size: 1.4rem;
+    font-size: 2rem;
     font-weight: 600;
     margin: 0;
 }
 
 .entry-list {
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
     flex: 1;
     overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
     -webkit-overflow-scrolling: touch;
     list-style: none;
     margin: 0;
@@ -29,37 +35,41 @@
 }
 
 .entry-list li {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
     background: var(--color-surface-translucent);
     color: var(--color-text);
     border: 1px solid var(--color-surface-translucent-border);
     border-radius: 10px;
-    padding: 0.75rem 1rem;
-    font-size: 0.95rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
 }
 
 .empty {
+    font-size: 1.1rem;
     color: var(--color-text-muted);
     margin: auto 0;
 }
 
 .back-link {
-    display: block;
-    box-sizing: border-box;
-    padding: 0.9rem 1rem;
-    border-radius: 8px;
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 10px;
     border: 1px solid var(--color-surface-border);
-    font-size: 1rem;
+    font-size: 1.15rem;
     color: var(--color-violet-text);
     text-decoration: none;
 }
 
 .delete-button {
-    padding: 0.9rem 1rem;
-    border-radius: 8px;
+    padding: 1rem 2rem;
+    border-radius: 10px;
     border: 1px solid var(--color-danger-border);
     background: var(--color-danger-bg);
     color: var(--color-danger-text);
-    font-size: 1rem;
+    font-size: 1.15rem;
     cursor: pointer;
 }
 
