@@ -1,8 +1,13 @@
 :root {
     color-scheme: light dark;
-    --color-bg: #faf9f6;
+    --color-bg: #faf2f6;
+    --color-surface: #ffffff;
+    --color-surface-border: #d8d5cf;
+    --color-surface-translucent: rgba(255, 255, 255, 0.08);
+    --color-surface-translucent-border: rgba(150, 140, 140, 0.65);
     --color-text: #23261f;
     --color-text-muted: #6e7268;
+    --color-violet-text: #7a3f63;
     --color-mint-bg: #e1f3e8;
     --color-mint-border: #8fcfae;
     --color-mint-text: #1c6b44;
@@ -13,9 +18,14 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-bg: #14160f;
+        --color-bg: #0a0a12;
+        --color-surface: #1c1c22;
+        --color-surface-border: #38383f;
+        --color-surface-translucent: rgba(255, 255, 255, 0.02);
+        --color-surface-translucent-border: rgba(255, 255, 255, 0.3);
         --color-text: #edefea;
         --color-text-muted: #9ba096;
+        --color-violet-text: #c7ade0;
         --color-mint-bg: #1e3a2c;
         --color-mint-border: #3e7a5a;
         --color-mint-text: #7fdba8;
@@ -32,6 +42,13 @@ html, body {
     overscroll-behavior: none;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+input, textarea {
+    user-select: text;
+    -webkit-user-select: text;
 }
 
 body {
