@@ -13,22 +13,62 @@
     else
     {
         <ul class="entry-list">
-            @foreach (var entry in entries)
+            @for (var i = entries.Count - 1; i >= 0; i--)
             {
-                <li>@entry.Timestamp.ToString("MMM d, yyyy, HH:mm")</li>
+                <li>@entries[i].Timestamp.ToString("MMM d, yyyy, HH:mm")</li>
             }
         </ul>
     }
 
+    <button class="delete-button" disabled="@(entries.Count == 0)" @onclick="OpenConfirm">Delete all entries</button>
+
     <a class="back-link" href="">Back</a>
 </div>
 
+@if (showConfirm)
+{
+    <div class="confirm-overlay">
+        <div class="confirm-dialog">
+            <h2>Delete all entries?</h2>
+            <p>This will permanently delete all @entries.Count entries for "@topic.Name". This cannot be undone.</p>
+            <p>Type <strong>@topic.Name</strong> to confirm.</p>
+            <input @bind="confirmText" @bind:event="oninput" placeholder="@topic.Name" />
+            <div class="confirm-actions">
+                <button class="cancel-button" @onclick="CloseConfirm">Cancel</button>
+                <button class="confirm-delete-button" disabled="@(confirmText != topic.Name)" @onclick="ConfirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+}
+
 @code {
+    private readonly Topic topic = new() { Id = 1, Name = "Daily task" };
+
     private List<Entry> entries = new();
+    private bool showConfirm;
+    private string confirmText = "";
 
     protected override async Task OnInitializedAsync()
     {
-        entries = await EntryStorageService.LoadEntriesAsync();
-        entries.Reverse();
+        entries = await EntryStorageService.GetEntriesAsync();
+    }
+
+    private void OpenConfirm()
+    {
+        showConfirm = true;
+        confirmText = "";
+    }
+
+    private void CloseConfirm()
+    {
+        showConfirm = false;
+        confirmText = "";
+    }
+
+    private async Task ConfirmDelete()
+    {
+        await EntryStorageService.ClearEntriesAsync();
+        showConfirm = false;
+        confirmText = "";
     }
 }

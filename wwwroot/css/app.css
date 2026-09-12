@@ -6,6 +6,9 @@
     --color-mint-bg: #e1f3e8;
     --color-mint-border: #8fcfae;
     --color-mint-text: #1c6b44;
+    --color-danger-bg: #fbe4e2;
+    --color-danger-border: #e79a90;
+    --color-danger-text: #9c2b1f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,6 +19,9 @@
         --color-mint-bg: #1e3a2c;
         --color-mint-border: #3e7a5a;
         --color-mint-text: #7fdba8;
+        --color-danger-bg: #3a1a16;
+        --color-danger-border: #7a3a30;
+        --color-danger-text: #f0a99c;
     }
 }
 

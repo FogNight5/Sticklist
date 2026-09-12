@@ -45,3 +45,95 @@
     color: var(--color-mint-text);
     text-decoration: none;
 }
+
+.delete-button {
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-danger-border);
+    background: var(--color-danger-bg);
+    color: var(--color-danger-text);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.delete-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.confirm-dialog {
+    background: var(--color-bg);
+    color: var(--color-text);
+    border-radius: 12px;
+    padding: 1.5rem;
+    max-width: 320px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.confirm-dialog h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+}
+
+.confirm-dialog p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0 0 0.75rem;
+}
+
+.confirm-dialog input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 0.6rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-mint-border);
+    background: transparent;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.cancel-button,
+.confirm-delete-button {
+    flex: 1;
+    padding: 0.6rem 0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background: transparent;
+    border: 1px solid var(--color-mint-border);
+    color: var(--color-text);
+}
+
+.confirm-delete-button {
+    border: 1px solid var(--color-danger-border);
+    background: var(--color-danger-bg);
+    color: var(--color-danger-text);
+}
+
+.confirm-delete-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
