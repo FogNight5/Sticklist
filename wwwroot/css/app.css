@@ -44,6 +44,7 @@ html, body {
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     -webkit-user-select: none;
+    background: var(--color-bg);
 }
 
 input, textarea {
