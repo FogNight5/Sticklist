@@ -75,7 +75,7 @@
 .history-link {
     display: inline-block;
     padding: 1rem 2rem;
-    border-radius: 10px;
+    border-radius: 999px;
     border: 1px solid var(--color-surface-border);
     font-size: 1.15rem;
     color: var(--color-violet-text);

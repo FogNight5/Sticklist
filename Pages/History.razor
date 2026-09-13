@@ -1,4 +1,5 @@
 @page "/history"
+@using System.Text.Json
 @inject EntryStorageService EntryStorageService
 
 <PageTitle>History</PageTitle>
@@ -20,6 +21,8 @@
         </ul>
     }
 
+    <button class="import-button" @onclick="OpenImport">Import entries</button>
+
     <button class="delete-button" disabled="@(entries.Count == 0)" @onclick="OpenConfirm">Delete all entries</button>
 
     <a class="back-link" href="">Back</a>
@@ -27,15 +30,35 @@
 
 @if (showConfirm)
 {
-    <div class="confirm-overlay">
-        <div class="confirm-dialog">
+    <div class="overlay">
+        <div class="dialog">
             <h2>Delete all entries?</h2>
             <p>This will permanently delete all @entries.Count entries for "@topic.Name". This cannot be undone.</p>
             <p>Type <strong>@topic.Name</strong> to confirm.</p>
             <input @bind="confirmText" @bind:event="oninput" placeholder="@topic.Name" />
-            <div class="confirm-actions">
+            <div class="dialog-actions">
                 <button class="cancel-button" @onclick="CloseConfirm">Cancel</button>
                 <button class="confirm-delete-button" disabled="@(confirmText != topic.Name)" @onclick="ConfirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (showImport)
+{
+    <div class="overlay">
+        <div class="dialog">
+            <h2>Import entries</h2>
+            <p>Paste JSON or choose a file. Expected format: <code>[{"Timestamp":"2026-01-01T10:00:00"}]</code></p>
+            <InputFile OnChange="HandleFileSelected" accept=".json,application/json" />
+            <textarea @bind="importText" @bind:event="oninput" rows="6" placeholder='[{"Timestamp":"2026-01-01T10:00:00"}]'></textarea>
+            @if (importError is not null)
+            {
+                <p class="import-error">@importError</p>
+            }
+            <div class="dialog-actions">
+                <button class="cancel-button" @onclick="CloseImport">Cancel</button>
+                <button class="import-submit-button" disabled="@string.IsNullOrWhiteSpace(importText)" @onclick="SubmitImport">Import</button>
             </div>
         </div>
     </div>
@@ -47,6 +70,9 @@
     private List<Entry> entries = new();
     private bool showConfirm;
     private string confirmText = "";
+    private bool showImport;
+    private string importText = "";
+    private string? importError;
 
     protected override async Task OnInitializedAsync()
     {
@@ -70,5 +96,49 @@
         await EntryStorageService.ClearEntriesAsync();
         showConfirm = false;
         confirmText = "";
+    }
+
+    private void OpenImport()
+    {
+        showImport = true;
+        importText = "";
+        importError = null;
+    }
+
+    private void CloseImport()
+    {
+        showImport = false;
+        importText = "";
+        importError = null;
+    }
+
+    private async Task HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        importError = null;
+        try
+        {
+            using var stream = e.File.OpenReadStream(maxAllowedSize: 5 * 1024 * 1024);
+            using var reader = new StreamReader(stream);
+            importText = await reader.ReadToEndAsync();
+        }
+        catch (Exception)
+        {
+            importError = "Could not read the selected file.";
+        }
+    }
+
+    private async Task SubmitImport()
+    {
+        importError = null;
+        try
+        {
+            await EntryStorageService.ImportEntriesAsync(importText);
+            showImport = false;
+            importText = "";
+        }
+        catch (JsonException)
+        {
+            importError = "That doesn't look like valid entries JSON.";
+        }
     }
 }
